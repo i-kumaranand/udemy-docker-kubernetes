@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+#can do away with this statement only if
+#we plan to use docker-compose file as it will map the container
+#volumes back to the local machine. However if we do not use
+#docker-compose then this COPY command will be needed to copy
+#over all the files to the container.
+
+COPY . .
+
+CMD ["npm", "run", "start"]
